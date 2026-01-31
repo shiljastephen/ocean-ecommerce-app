@@ -1,0 +1,23 @@
+# ========== DJANGO ==========
+__pycache__/
+*.py[cod]
+db.sqlite3
+*.sqlite3
+.env
+venv/
+env/
+.venv/
+.idea/
+
+# ========== REACT / VITE ==========
+node_modules/
+dist/
+build/
+.env
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+media/

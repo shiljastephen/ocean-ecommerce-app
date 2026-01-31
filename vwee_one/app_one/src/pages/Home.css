@@ -1,0 +1,28 @@
+.home {
+  min-height: 100vh;
+  padding: 20px 40px;
+  background: linear-gradient(135deg, #02084e, #69cec6);
+}
+
+.home h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #0e034e;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  color: #0e034e;
+  margin-top: 30px;
+}
+
+
+/* Home.css */
+@media (max-width: 600px) {
+  .home {
+    grid-template-columns: 1fr; /* 1 card per row */
+    padding: 10px;
+  }
+}
