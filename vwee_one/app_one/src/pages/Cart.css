@@ -1,22 +1,26 @@
 .cart-container {
+  display: flex;
+  flex-wrap: wrap;              /* 🔥 allows items to move to next row */
+  justify-content: center;      /* centers cards */
+  gap: 30px;                    /* space between cards */
   min-height: 100vh;
   padding: 40px 20px;
-  text-align: center;
   background: linear-gradient(135deg, #070d49, #72e1d8);
 }
+
 .cart-item {
   display: flex;
   height: 300px;
-  width: 420px;
+  width: 480px;
   align-items: left;
   gap: 10px;
-  background: rgb(96, 7, 7);
+  border-radius: 7%;
+  background: rgb(41, 69, 78);
   padding: 10px;
 }
 
 .cart-img {
-  width: 160px;
-  height: 150px;
+  width: 210px;
   object-fit: cover;
   border-radius: 6px;
   padding: 5px;
@@ -24,13 +28,13 @@
 
 .place-order-btn {
   padding: 12px;
-  height: 60px;
-  width: 180px;
-  background: rgb(169, 136, 136);
+  width: 170px;
+  border-radius: 6%;
+  background: rgb(43, 103, 163);
   color: rgb(29, 1, 1);
   align-items: left;
   text-align: center;
-  text-decoration: aliceblue;
+  text-decoration: rgb(182, 209, 232);
   cursor: pointer;
 }
 .cart-check {

@@ -1,13 +1,14 @@
 .orders {
   min-height: 100vh;
   padding: 40px 20px;
-  text-align: center;
   background: linear-gradient(135deg, #070d49, #72e1d8);
+  display: flex;
+  flex-direction: column;
+  align-items:center;   /* centers cards horizontally */
 }
 
 .order-card {
-  background: rgb(128, 48, 72);
-  height: 500px;
+  background: rgb(40, 115, 101);
   width: 400px;
   margin-bottom: 20px;
   padding: 15px;
@@ -26,6 +27,7 @@
   border-radius: 6px;
   font-size: 13px;
   color: rgb(85, 19, 217);
+  font-weight: 600;
 }
 
 .status.pending { background: orange; }
@@ -37,7 +39,7 @@
 }
 
 .order-item {
-  display:contents;
+  display: flex;
   gap: 10px;
   align-items: center;
   margin-bottom: 10px;

@@ -1,10 +1,11 @@
 .product-detail {
   display: flex;
-  gap: 40px;
-  padding: 40px;
-  max-width: 1100px;
-  margin: auto;
-  flex-wrap: wrap;
+  flex-wrap: wrap;              
+  justify-content: center;      
+  gap: 30px;                    
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #070d49, #72e1d8);
 }
 
 /* Image Section */
@@ -34,7 +35,7 @@
 }
 
 .product-info p {
-  color: #555;
+  color: #f0e2e2;
   line-height: 1.6;
 }
 
@@ -46,7 +47,7 @@
 }
 
 .discount {
-  color: green;
+  color: rgb(1, 35, 15);
   font-weight: 600;
   margin-bottom: 20px;
 }
