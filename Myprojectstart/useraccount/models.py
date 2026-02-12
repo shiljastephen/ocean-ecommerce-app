@@ -3,10 +3,16 @@ from django.db import models
 
 class User(AbstractUser):
     ROLE_CHOICES = (
-        ('user', 'User'),
         ('admin', 'Admin'),
+        ('vendor', 'Vendor'),
+        ('customer', 'Customer'),
+        ('platform_admin', 'Platform Admin'),
+
     )
     phone = models.CharField(max_length=15, blank=True)
-    # email = models.EmailField(blank=True)
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='user')
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='customer')
+    
 
+
+    def __str__(self):
+        return f"{self.username} ({self.role})"

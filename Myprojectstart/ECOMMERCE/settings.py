@@ -42,10 +42,13 @@ INSTALLED_APPS = [
     'useraccount',
     'products',
     'cart',
-    'orders',
+    'orders.apps.OrdersConfig',
+    'shops',
     'rest_framework',
     'corsheaders',
     'django_extensions',
+    'vendor',
+    
 
 ]
 
@@ -158,4 +161,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID", "")
+RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET", "")
 

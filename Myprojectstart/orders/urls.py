@@ -1,11 +1,24 @@
 from django.urls import path
-from .views import BuyNowOrder, OrderHistoryView, AdminOrderListView, UpdateOrderStatusView
+from .views import (
+    PlaceOrderFromCart,
+    MyOrdersView,
+    VendorOrderListView,
+    VendorOrderUpdateView,
+    AllOrdersView,
+    OrderTrackingView,
+    CancelOrderView,
+)
 
 urlpatterns = [
-    path('buy-now/', BuyNowOrder.as_view()),
-    path('history/', OrderHistoryView.as_view(), name='order-history'),
-    #Admin
-    path('admin/orders/', AdminOrderListView.as_view(), name='admin-orders'),
-    path('admin/orders/<int:pk>/status/', UpdateOrderStatusView.as_view(), name='update-order-status'),
-]
+    # 🛒 CUSTOMER
+    path("place/order/", PlaceOrderFromCart.as_view(), name="place-order"),
+    path("my-orders/", MyOrdersView.as_view(), name="my-orders"),
 
+    # 🏪 VENDOR
+    path("vendor/orders/", VendorOrderListView.as_view(), name="vendor-orders"),
+    path("vendor/order-item/<int:pk>/update/",VendorOrderUpdateView.as_view(),name="vendor-order-update"),
+    path("track/<int:pk>/",OrderTrackingView.as_view(),name="order-tracking"),
+    # 👑 PLATFORM ADMIN
+    path("admin/orders/", AllOrdersView.as_view(), name="all-orders"),
+    path("cancel/<int:pk>/", CancelOrderView.as_view(), name="cancel-order"),
+]

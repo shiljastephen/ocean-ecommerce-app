@@ -1,41 +1,56 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.exceptions import ValidationError
 from .models import Product, Category
 from .serializers import ProductSerializer, CategorySerializer
-from useraccount.permissions import IsAdmin
+from .permissions import IsVendor, IsPlatformAdmin
+
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    authentication_classes = []
+    permission_classes = [AllowAny]
+
 
 class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
 
     def get_queryset(self):
-        queryset = Product.objects.all()
-        search = self.request.query_params.get('search')
-        category = self.request.query_params.get('category')
+        user = self.request.user
 
-        if search:
-            queryset = queryset.filter(name__icontains=search)
+        # PLATFORM ADMIN → sees all
+        if user.is_authenticated and user.role == "platform_admin":
+            return Product.objects.all()
 
-        if category:
-            queryset = queryset.filter(category__id=category)
+        # VENDOR → sees own products
+        if user.is_authenticated and user.role == "vendor":
+            return Product.objects.filter(shop__owner=user)
 
-        return queryset
+        # CUSTOMER → only approved
+        return Product.objects.filter(is_approved=True, is_available=True)
+
+    def perform_create(self, serializer):
+        shop = self.request.user.shops.first()
+        if not shop:
+            raise ValidationError("Active shop required to create products")
+        serializer.save(shop=shop, is_approved=False)
 
     def get_permissions(self):
-        if self.action in ['create', 'update', 'partial_update', 'destroy']:
-            return [IsAdmin()]
+        if self.action in ["create", "update", "partial_update", "destroy"]:
+            return [IsVendor()]
         return [AllowAny()]
 
-    def get_authenticators(self):
-        if self.request.method in ['GET']:
-            return []  # no authentication for read-only
-        return super().get_authenticators()
 
-    def get_serializer_context(self):
-        return {"request": self.request}
+class ApproveProductView(APIView):
+    permission_classes = [IsPlatformAdmin]
 
-
+    def post(self, request, pk):
+        try:
+            product = Product.objects.get(pk=pk)
+            product.is_approved = True
+            product.save()
+            return Response({"message": "Product approved"})
+        except Product.DoesNotExist:
+            return Response({"error": "Not found"}, status=404)

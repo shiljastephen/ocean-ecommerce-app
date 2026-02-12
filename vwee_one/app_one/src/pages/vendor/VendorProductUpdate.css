@@ -1,0 +1,76 @@
+.vendor-update-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #e9e6e6;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.vendor-update-container h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.vendor-update-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.vendor-update-form input,
+.vendor-update-form select,
+.vendor-update-form textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.vendor-update-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.vendor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.vendor-image-preview {
+  text-align: center;
+}
+
+.vendor-image-preview img {
+  width: 150px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.vendor-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vendor-update-form button {
+  padding: 10px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.vendor-update-form button:hover {
+  background-color: #1e40af;
+}
+
+.vendor-error {
+  color: red;
+  margin-bottom: 15px;
+  text-align: center;
+}

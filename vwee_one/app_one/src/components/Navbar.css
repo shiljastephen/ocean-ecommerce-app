@@ -1,69 +1,92 @@
 .navbar {
+  width: 100%;
+  padding: 14px 5%;
+
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  border-radius: 16px;
-  padding: 15px 30px;
-  background: #d1e9ee;
-  box-shadow: 0 2px 10px rgba(27, 42, 179, 0.08);
-  position: sticky;
+  justify-content: space-between;
   flex-wrap: wrap;
-  top: 0;
-}
-.search-bar {
-  padding: 8px 12px;
-  width: 250px;
-  margin: 5px 10px;
-  border-radius: 5px;
-  border: none;
-  color: #c3eaf2;
-  background: linear-gradient(135deg, #02084e, #69cec6);
-}
-.subhead a {
-  margin-left: 15px;
-  color: white;
-  text-decoration: none;
+
+  background: #a2e4e2;
 }
 
+/* LOGO */
 .logo {
+  font-size: 24px;
   font-weight: bold;
-  font-size: 22px;
+  color: #09033c;
 }
-.navbar div {
-  display: flex;              
-  gap: 25px;
+
+/* SEARCH */
+.search-bar {
+  flex: 1;
+  min-width: 200px;
+  max-width: 450px;
+
+  margin: 10px 20px;
+  padding: 10px 15px;
+
+  border-radius: 25px;
+  border: none;
+  outline: none;
 }
-.categories {
+
+/* LINKS */
+.subhead {
   display: flex;
-  gap: 10px;
+  gap: 18px;
   flex-wrap: wrap;
-  color: #212425;
 }
 
-.navbar a {
-  margin-left: 10px;
+.subhead a {
+  color: rgb(0, 4, 30);
   text-decoration: none;
-  color: #390e62;
-  font-weight: 500;
+  font-size: 15px;
+  transition: 0.3s;
 }
 
+.subhead a:hover {
+  color: #63cddb;
+}
 
-@media (max-width: 600px) {
+.username {
+  font-weight: bold;
+  color: #010c1b;
+}
+
+.logout-btn {
+  background: #0e0135;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.logout-btn:hover {
+  background: #d32f2f;
+}
+
+@media (max-width: 768px) {
+
   .navbar {
-    flex-direction: column;     /* stack logo + links */
-    align-items: flex-start;
-    padding: 15px;
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .navbar div {
-    flex-direction: column;     /* stack links vertically */
-    margin-top: 10px;
-    gap: 10px;
+  .search-bar {
+    width: 100%;
+    margin: 10px 0;
   }
 
-  .navbar a {
-    display: block;
-    margin: 6px 0;
+  .subhead {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   }
 }
 

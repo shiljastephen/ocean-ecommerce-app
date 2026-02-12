@@ -29,6 +29,11 @@ urlpatterns = [
     path('api/cart/', include('cart.urls')),
     #orders
     path('api/orders/', include('orders.urls')),
+    #shops
+    path('api/shops/', include('shops.urls')),
+    #vendor
+    path('api/vendor/', include('vendor.urls')),
 ]
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

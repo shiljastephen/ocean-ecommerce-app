@@ -1,0 +1,93 @@
+.vendor-product-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #e8d8d8;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(50, 23, 23, 0.08);
+  font-family: "Poppins", sans-serif;
+}
+
+.vendor-product-title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #1e293b;
+}
+
+.vendor-error {
+  color: #dc2626;
+  background: #fee2e2;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.vendor-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.vendor-input,
+.vendor-select,
+.vendor-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.vendor-input:focus,
+.vendor-select:focus,
+.vendor-textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.vendor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.vendor-file {
+  font-size: 14px;
+}
+
+.vendor-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: #374151;
+}
+
+.vendor-button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.vendor-button:hover {
+  background: #1e40af;
+}
+
+.vendor-button:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+.vendor-note {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #6b7280;
+}
