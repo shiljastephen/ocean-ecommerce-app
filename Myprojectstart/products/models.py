@@ -1,19 +1,15 @@
 from django.db import models
 from shops.models import Shop
+from django.db.models import Avg
 
-# =====================
-# 🗂 CATEGORY
-# =====================
+#  CATEGORY
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
-
-# =====================
-# 📦 PRODUCT
-# =====================
+#  PRODUCT
 class Product(models.Model):
     shop = models.ForeignKey("shops.Shop", on_delete=models.CASCADE, related_name='products')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products")
@@ -24,7 +20,7 @@ class Product(models.Model):
     stock = models.PositiveIntegerField()
     image = models.ImageField(upload_to='products/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    is_available = models.BooleanField(default=True)
+    is_available = models.BooleanField(default=True) 
     is_approved = models.BooleanField(default=False)
 
     class Meta:
@@ -40,3 +36,7 @@ class Product(models.Model):
         discount = self.discount or 0
         return self.price - (self.price * discount / 100)
 
+    @property
+    def average_rating(self):
+        avg = self.reviews.aggregate(avg=Avg('rating'))['avg']
+        return avg if avg is not None else 0

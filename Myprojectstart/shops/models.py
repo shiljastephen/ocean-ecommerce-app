@@ -5,7 +5,7 @@ class Shop(models.Model):
     owner = models.ForeignKey(
         "useraccount.User",
         on_delete=models.CASCADE,
-        related_name='shops'   # ✅ plural (better practice)
+        related_name='shops'   
     )
     name = models.CharField(max_length=150)
     description = models.TextField(blank=True)

@@ -22,7 +22,7 @@ function VendorOrders() {
     try {
       await API.patch(
         `orders/vendor/order-item/${id}/update/`,
-        { status }
+        { vendor_status: status, }
       );
       fetchOrders(); // refresh
     } catch (err) {
@@ -45,21 +45,23 @@ function VendorOrders() {
             <p>Qty: {item.quantity}</p>
             <p>
               Status:
-              <span className={`status-badge status-${item.status}`}>
-               {item.status}
+              <span className={`status-badge status-${item.vendor_status}`}>
+               {item.vendor_status}
               </span>
             </p>
 
 
             <select
-              value={item.status}
+              value={item.vendor_status}
               onChange={(e) =>
                 updateStatus(item.id, e.target.value)
               }
             >
-              <option value="PENDING">Pending</option>
-              <option value="SHIPPED">Shipped</option>
-              <option value="DELIVERED">Delivered</option>
+              <option value="pending">Pending</option>
+              <option value="packed">Packed</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
             </select>
           </div>
         ))

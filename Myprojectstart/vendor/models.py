@@ -1,7 +1,6 @@
 from django.db import models
 from useraccount.models import User
 
-
 class VendorApplication(models.Model):
 
     STATUS_CHOICES = (

@@ -19,8 +19,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar />
-
+      {/* <Navbar/> */}
       <Routes>
         {/* CUSTOMER ROUTES */}
         <Route path="/" element={<Home />} />

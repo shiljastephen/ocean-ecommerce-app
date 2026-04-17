@@ -1,6 +1,7 @@
 import { useState } from "react";
 import API from "../services/api";
 import "./Login.css";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -56,6 +57,13 @@ function Login() {
         />
 
         <button type="submit">Login</button>
+        {/* ✅ Register Link */}
+       <p style={{ marginTop: "15px" }}>
+         Don't have an account?{" "}
+         <Link to="/register" style={{ color: "blue", fontWeight: "bold" }}>
+           Register here
+         </Link>
+       </p>
       </form>
     </div>
   );

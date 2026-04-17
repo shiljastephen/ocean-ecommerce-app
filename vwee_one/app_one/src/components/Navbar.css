@@ -1,14 +1,11 @@
 .navbar {
   width: 100%;
   padding: 14px 5%;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-
-  background: #a2e4e2;
-}
+  background: #a7e8eae7;
 
 /* LOGO */
 .logo {
@@ -46,7 +43,7 @@
 }
 
 .subhead a:hover {
-  color: #63cddb;
+  color: #91e8f4;
 }
 
 .username {
@@ -89,4 +86,4 @@
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   }
 }
-
+}

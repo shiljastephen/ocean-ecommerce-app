@@ -21,28 +21,22 @@ class VendorApplyView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        # ✅ Prevent Duplicate Apply
         if VendorApplication.objects.filter(user=self.request.user).exists():
             raise ValidationError("You already applied for vendor")
 
-        # ✅ Prevent Vendor Applying Again
         if self.request.user.role == "vendor":
             raise ValidationError("You are already a vendor")
-
         serializer.save(user=self.request.user)
 
 class AdminVendorApplicationListView(ListAPIView):
     serializer_class = VendorApplicationAdminSerializer
     permission_classes = [IsAuthenticated, IsAdminUserOnly]
-
     queryset = VendorApplication.objects.select_related("user").order_by("-created_at")
 
 class ApproveVendorView(APIView):
     permission_classes = [IsAuthenticated, IsPlatformAdmin]
-
     @transaction.atomic
     def post(self, request, pk):
-
         try:
             application = VendorApplication.objects.select_for_update().get(pk=pk)
         except VendorApplication.DoesNotExist:
@@ -52,13 +46,11 @@ class ApproveVendorView(APIView):
             return Response({"message": "Already approved"})
 
         user = application.user
-
-        # ✅ Update user role
         user.role = "vendor"
         user.save()
 
         # ✅ Update application
-        application.status = "APPROVED"
+        application.status = "approved"
         application.save()
 
         # ✅ Auto create shop
@@ -75,7 +67,6 @@ class ApproveVendorView(APIView):
 
 class RejectVendorView(APIView):
     permission_classes = [IsAuthenticated, IsPlatformAdmin]
-
     def post(self, request, pk):
 
         try:

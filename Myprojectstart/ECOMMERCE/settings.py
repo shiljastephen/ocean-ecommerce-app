@@ -48,8 +48,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_extensions',
     'vendor',
-    
-
+    'review',
+    'wishlist',
 ]
 
 MIDDLEWARE = [
@@ -90,8 +90,8 @@ WSGI_APPLICATION = 'ECOMMERCE.wsgi.application'
 DATABASES = {
 'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydbstart',     # DB you created
-        'USER': 'root',     # your DB user
+        'NAME': 'mydbstart',    
+        'USER': 'root',     
         'PASSWORD': 'Helen@12shil',
         'HOST': 'localhost',
         'PORT': '3306',

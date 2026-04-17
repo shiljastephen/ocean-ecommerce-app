@@ -7,7 +7,6 @@ function VendorTopBar() {
       <NavLink to="/vendor/dashboard">Dashboard</NavLink>
       <NavLink to="/vendor/products">View Products</NavLink>
       <NavLink to="/vendor/products/add">Add Product</NavLink>
-      <NavLink to="/vendor/shop/create">Create Shop</NavLink>
       <NavLink to="/VendorOrders">Orders</NavLink>
     </div>
   );

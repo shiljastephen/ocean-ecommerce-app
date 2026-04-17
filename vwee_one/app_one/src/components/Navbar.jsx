@@ -45,6 +45,7 @@ function Navbar({ search, setSearch }) {
         <Link to="/">Home</Link>
         <Link to="/cart">Cart</Link>
         <Link to="/orders">Orders</Link>
+        <a href="/wishlist">❤️ Wishlist</a>
 
         {/* Show Vendor Apply only if logged in and not vendor */}
         {isLoggedIn && role !== "vendor" && (

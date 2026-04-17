@@ -1,7 +1,8 @@
 .cart-container {
   min-height: 100vh;
+  color: #f3ecec;
   padding: 40px 20px;
-  background: #f4f6f9;
+  background: linear-gradient(135deg, #070d49, #72e1d8);
 }
 
 .cart-container h2 {
@@ -16,8 +17,9 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  background:  #bde5e4;
+  background: rgb(252, 250, 250);
   padding: 20px;
+  color: #220202;
   margin: 20px auto;
   max-width: 900px;
   border-radius: 16px;
@@ -98,8 +100,9 @@
 .cart-summary {
   max-width: 900px;
   margin: 40px auto;
+  color: #000;
   padding: 25px;
-  background: rgb(240, 216, 216);
+  background: rgb(252, 251, 251);
   border-radius: 18px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   text-align: right;

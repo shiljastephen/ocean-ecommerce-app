@@ -4,6 +4,7 @@ import VendorProductCreate from "../pages/vendor/VendorProductCreate";
 import VendorProductUpdate from "../pages/vendor/VendorProductUpdate";
 import VendorDashboard from "../pages/vendor/VendorDashboard";
 import VendorOrders from "../pages/VendorOrders";
+import Wishlist from "../pages/Wishlist";
 
 const AppRoutes = () => (
   <Routes>
@@ -12,6 +13,7 @@ const AppRoutes = () => (
     <Route path="/vendor/products/:id" element={<VendorProductUpdate />} />
     <Route path="/vendor/dashboard" element={<VendorDashboard />} />
     <Route path="/VendorOrders" element={<VendorOrders />} />
+    <Route path="/wishlist" element={<Wishlist />} />
   </Routes>
 );
 

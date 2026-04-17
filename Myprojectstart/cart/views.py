@@ -5,9 +5,7 @@ from django.shortcuts import get_object_or_404
 from .models import Cart
 from .serializers import CartSerializer
 
-# ===============================
-# 🛒 VIEW CART
-# ===============================
+# VIEW CART
 class CartListView(generics.ListAPIView):
     serializer_class = CartSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -15,9 +13,7 @@ class CartListView(generics.ListAPIView):
     def get_queryset(self):
         return Cart.objects.filter(user=self.request.user)
 
-# ===============================
-# ➕ ADD TO CART
-# ===============================
+#  ADD TO CART
 class AddToCartView(generics.CreateAPIView):
     serializer_class = CartSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -45,18 +41,15 @@ class AddToCartView(generics.CreateAPIView):
         serializer = CartSerializer(cart_item)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-# ===============================
-# ❌ REMOVE FROM CART
-# ===============================
+#  REMOVE FROM CART
 class RemoveFromCartView(generics.DestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         return Cart.objects.filter(user=self.request.user)
 
-# ===============================
-# 🔄 UPDATE QUANTITY / SELECTION
-# ===============================
+
+# UPDATE QUANTITY / SELECTION
 class UpdateCartQuantityView(generics.UpdateAPIView):
     serializer_class = CartSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -86,9 +79,8 @@ class UpdateCartQuantityView(generics.UpdateAPIView):
         cart_item.save()
         return Response(CartSerializer(cart_item).data)
 
-# ===============================
-# ✅ TOGGLE SELECTION ONLY
-# ===============================
+
+#  TOGGLE SELECTION ONLY
 class ToggleCartSelectionView(generics.UpdateAPIView):
     serializer_class = CartSerializer
     permission_classes = [permissions.IsAuthenticated]

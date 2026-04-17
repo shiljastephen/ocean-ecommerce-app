@@ -33,6 +33,10 @@ urlpatterns = [
     path('api/shops/', include('shops.urls')),
     #vendor
     path('api/vendor/', include('vendor.urls')),
+    #review
+    path('api/', include('review.urls')),
+    #wishlist
+    path('api/', include('wishlist.urls')),
 ]
 
 if settings.DEBUG:

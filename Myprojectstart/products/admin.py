@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.utils.html import format_html
+from django.utils.html import mark_safe, format_html
 from .models import Category, Product
 
 
@@ -50,14 +50,16 @@ class ProductAdmin(admin.ModelAdmin):
 
     # 💰 Final price
     def final_price_display(self, obj):
-        return obj.final_price
-    final_price_display.short_description = 'Final Price'
-
+        if obj is None:
+            return "-"
+        return format_html("₹ {}", obj.final_price)
     # 📉 Stock status
+    from django.utils.safestring import mark_safe
+
     def stock_status(self, obj):
         if obj.stock < 5:
-            return format_html('<span style="color:red; font-weight:bold;">Low Stock</span>')
-        return format_html('<span style="color:green;">OK</span>')
+            return mark_safe('<span style="color:red; font-weight:bold;">Low Stock</span>')
+        return mark_safe('<span style="color:green;">OK</span>')
     stock_status.short_description = "Stock Status"
 
     # 🧩 Form layout

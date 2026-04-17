@@ -30,7 +30,6 @@ class VendorApplicationAdmin(admin.ModelAdmin):
 
     @transaction.atomic
     def _approve(self, application):
-
         # Create shop only if not exists
         Shop.objects.get_or_create(
             owner=application.user,
@@ -41,10 +40,8 @@ class VendorApplicationAdmin(admin.ModelAdmin):
                 "is_active": True,
             },
         )
-
         # Update user role
         application.user.role = "vendor"
         application.user.save(update_fields=["role"])
-
         application.status = "APPROVED"
         application.save(update_fields=["status"])

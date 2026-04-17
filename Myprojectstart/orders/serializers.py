@@ -2,9 +2,7 @@ from rest_framework import serializers
 from .models import Order, OrderItem
 
 
-# =====================================
 # ORDER ITEM STATUS (FOR TRACKING)
-# =====================================
 class OrderItemStatusSerializer(serializers.ModelSerializer):
     product_name = serializers.CharField(source="product.name", read_only=True)
 
@@ -17,9 +15,7 @@ class OrderItemStatusSerializer(serializers.ModelSerializer):
             "vendor_status",
         ]
 
-# =====================================
 # ORDER ITEM (GENERAL)
-# =====================================
 class OrderItemSerializer(serializers.ModelSerializer):
     product_name = serializers.ReadOnlyField(source="product.name")
     product_price = serializers.ReadOnlyField(source="product.price")
@@ -40,10 +36,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
             "price",
         ]
 
-
-# =====================================
 # ORDER (CUSTOMER / ADMIN)
-# =====================================
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many=True, read_only=True)
 
@@ -65,10 +58,7 @@ class OrderSerializer(serializers.ModelSerializer):
             "created_at",
         ]
 
-
-# =====================================
 # VENDOR VIEW (ORDER ITEMS)
-# =====================================
 class VendorOrderItemSerializer(serializers.ModelSerializer):
     order_id = serializers.IntegerField(source="order.id", read_only=True)
     customer = serializers.CharField(
@@ -99,10 +89,7 @@ class VendorOrderItemSerializer(serializers.ModelSerializer):
             "price",
         ]
 
-
-# =====================================
 # ORDER TRACKING (CUSTOMER)
-# =====================================
 class OrderTrackingSerializer(serializers.ModelSerializer):
     items = OrderItemStatusSerializer(
         many=True,

@@ -16,20 +16,27 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
-
+    
     def get_queryset(self):
         user = self.request.user
+        queryset = Product.objects.all()
 
-        # PLATFORM ADMIN → sees all
-        if user.is_authenticated and user.role == "platform_admin":
-            return Product.objects.all()
+         # Role based filtering
+        if user.is_authenticated:
+            if user.role == "platform_admin":
+                queryset = Product.objects.all()
+            elif user.role == "vendor":
+                queryset = Product.objects.filter(shop__owner=user)
+            else:
+                queryset = Product.objects.filter(is_approved=True, is_available=True)
+        else:
+            queryset = Product.objects.filter(is_approved=True, is_available=True)
 
-        # VENDOR → sees own products
-        if user.is_authenticated and user.role == "vendor":
-            return Product.objects.filter(shop__owner=user)
-
-        # CUSTOMER → only approved
-        return Product.objects.filter(is_approved=True, is_available=True)
+        # 📂 Category filtering
+        category = self.request.query_params.get("category")
+        if category:
+            queryset = queryset.filter(category_id=category)
+        return queryset 
 
     def perform_create(self, serializer):
         shop = self.request.user.shops.first()
