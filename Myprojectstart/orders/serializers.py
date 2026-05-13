@@ -4,14 +4,32 @@ from .models import Order, OrderItem
 
 # ORDER ITEM STATUS (FOR TRACKING)
 class OrderItemStatusSerializer(serializers.ModelSerializer):
-    product_name = serializers.CharField(source="product.name", read_only=True)
+
+    product_name = serializers.CharField(
+        source="product.name",
+        read_only=True
+    )
+
+    product_image = serializers.ImageField(
+        source="product.image",
+        read_only=True
+    )
+
+    price = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        read_only=True
+    )
 
     class Meta:
         model = OrderItem
+
         fields = [
             "id",
             "product_name",
+            "product_image",
             "quantity",
+            "price",
             "vendor_status",
         ]
 

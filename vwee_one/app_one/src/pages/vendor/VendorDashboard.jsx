@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { getVendorDashboard } from "../../services/vendorApi";
 import VendorTopBar from "../../components/VendorTopBar";
+import SalesChart from "../../components/SalesChart";
+import "./VendorDashboard.css";
 
 const VendorDashboard = () => {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchDashboard = async () => {
@@ -14,54 +14,74 @@ const VendorDashboard = () => {
         setData(res.data);
       } catch (err) {
         console.error(err);
-        setError("Failed to load dashboard data");
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchDashboard();
   }, []);
 
+  if (!data) return <p>Loading...</p>;
+
   return (
     <>
-      {/* ✅ Vendor Sub Navbar */}
       <VendorTopBar />
 
-      {/* ✅ Dashboard Content */}
-      <div style={{ padding: "30px" }}>
+      <div className="dashboard">
         <h2>Vendor Dashboard</h2>
 
-        {loading && <p>Loading dashboard...</p>}
+        {/* 🔹 Shop Info */}
+        <div className="shop-card">
+          <p><strong>Shop:</strong> {data.shop_name || "No Shop"}</p>
+          <p>
+            <strong>Status:</strong>{" "}
+            {data.shop_active ? "Active ✅" : "Inactive ❌"}
+          </p>
+        </div>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {/* 🔥 Stats Cards */}
+        <div className="stats-grid">
 
-        {data && (
-          <div
-            style={{
-              marginTop: "20px",
-              background: "#fff",
-              padding: "20px",
-              borderRadius: "10px",
-              boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-              maxWidth: "500px",
-            }}
-          >
-            <p>
-              <strong>Shop Name:</strong>{" "}
-              {data.shop_name ? data.shop_name : "No Shop Created"}
-            </p>
-
-            <p>
-              <strong>Total Products:</strong> {data.total_products}
-            </p>
-
-            <p>
-              <strong>Shop Status:</strong>{" "}
-              {data.shop_active ? "Active ✅" : "Inactive ❌"}
-            </p>
+          <div className="stat-card">
+            <span className="icon">📦</span>
+            <h4>Total Products</h4>
+            <p>{data.total_products}</p>
           </div>
-        )}
+
+          <div className="stat-card">
+            <span className="icon">🛒</span>
+            <h4>Total Orders</h4>
+            <p>{data.total_orders}</p>
+          </div>
+
+          <div className="stat-card">
+            <span className="icon">⏳</span>
+            <h4>Pending Orders</h4>
+            <p>{data.pending_orders}</p>
+          </div>
+
+          <div className="stat-card">
+            <span className="icon">✅</span>
+            <h4>Delivered</h4>
+            <p>{data.delivered_orders}</p>
+          </div>
+
+          <div className="stat-card revenue">
+            <span className="icon">💰</span>
+            <h4>Revenue</h4>
+            <p>₹{data.revenue}</p>
+          </div>
+
+        </div>
+
+        {/* 🔥 Insight */}
+        <p className="insight">
+          You have {data.pending_orders} pending orders 🚀
+        </p>
+
+        {/* 📊 FULL WIDTH CHART */}
+        <div className="chart-full">
+          <SalesChart />
+        </div>
       </div>
     </>
   );

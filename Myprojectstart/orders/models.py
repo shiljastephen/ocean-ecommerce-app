@@ -26,6 +26,7 @@ class Order(models.Model):
     )
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    address = models.TextField(blank=True, null=True)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     payment_method = models.CharField(max_length=20, choices=PAYMENT_METHODS, default='cod')
     payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS, default="pending")

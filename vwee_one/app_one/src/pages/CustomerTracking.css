@@ -1,0 +1,231 @@
+.customer-tracking {
+  min-height: 100vh;
+  padding: 40px 20px;
+
+  background: linear-gradient(135deg, #070d49, #72e1d8);
+
+  color: #ffffff;
+}
+
+/* =========================
+   PAGE TITLE
+========================= */
+.customer-tracking h2 {
+  text-align: center;
+
+  font-size: 34px;
+  font-weight: 700;
+
+  margin-bottom: 35px;
+
+  letter-spacing: 0.5px;
+}
+
+/* =========================
+   ORDER SUMMARY
+========================= */
+.tracking-summary {
+  max-width: 950px;
+
+  margin: 0 auto 35px auto;
+
+  background: #ffffff;
+  color: #111827;
+
+  padding: 30px;
+
+  border-radius: 22px;
+
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+.tracking-summary p {
+  margin-bottom: 16px;
+
+  font-size: 17px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* =========================
+   STATUS BADGE
+========================= */
+.status {
+  padding: 6px 14px;
+
+  border-radius: 30px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  color: white;
+}
+
+/* Pending */
+.status.pending {
+  background: #f59e0b;
+}
+
+/* Processing */
+.status.processing {
+  background: #3b82f6;
+}
+
+/* Shipped */
+.status.shipped {
+  background: #8b5cf6;
+}
+
+/* Delivered */
+.status.delivered {
+  background: #10b981;
+}
+
+/* Cancelled */
+.status.cancelled {
+  background: #ef4444;
+}
+
+/* =========================
+   PRODUCTS TITLE
+========================= */
+.customer-tracking h3 {
+  max-width: 950px;
+
+  margin: 0 auto 20px auto;
+
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* =========================
+   ITEMS CONTAINER
+========================= */
+.tracking-items {
+  max-width: 950px;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* =========================
+   SINGLE ITEM CARD
+========================= */
+.tracking-item {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+
+  background: #ffffff;
+  color: #111827;
+
+  padding: 22px;
+
+  border-radius: 20px;
+
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+
+  transition: 0.3s ease;
+}
+
+.tracking-item:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* =========================
+   PRODUCT IMAGE
+========================= */
+.tracking-item img {
+  width: 140px;
+  height: 140px;
+
+  object-fit: cover;
+
+  border-radius: 16px;
+
+  border: 1px solid #e5e7eb;
+}
+
+/* =========================
+   PRODUCT INFO
+========================= */
+.tracking-info {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  text-align: left;
+}
+
+.tracking-info h4 {
+  font-size: 24px;
+  font-weight: 700;
+
+  margin-bottom: 14px;
+
+  color: #111827;
+}
+
+.tracking-info p {
+  margin-bottom: 10px;
+
+  font-size: 16px;
+
+  line-height: 1.6;
+
+  color: #374151;
+}
+
+/* =========================
+   LOADING / EMPTY TEXT
+========================= */
+.customer-tracking p {
+  font-size: 16px;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+
+  .customer-tracking {
+    padding: 30px 15px;
+  }
+
+  .customer-tracking h2 {
+    font-size: 28px;
+  }
+
+  .customer-tracking h3 {
+    font-size: 24px;
+  }
+
+  .tracking-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tracking-item img {
+    width: 100%;
+    height: 220px;
+  }
+
+  .tracking-info h4 {
+    font-size: 22px;
+  }
+
+  .tracking-summary {
+    padding: 22px;
+  }
+}

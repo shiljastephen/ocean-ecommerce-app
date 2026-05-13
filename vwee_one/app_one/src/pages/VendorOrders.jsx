@@ -31,25 +31,26 @@ function VendorOrders() {
   };
 
   return (
-    <div className="vendor-orders">
-      <h2>Vendor Orders</h2>
+  <div className="vendor-orders-page">
+    <h2>Vendor Orders</h2>
 
+    <div className="vendor-orders">
       {items.length === 0 ? (
         <p>No orders yet</p>
       ) : (
-        items.map(item => (
+        items.map((item) => (
           <div key={item.id} className="vendor-card">
             <h4>{item.product_name}</h4>
 
             <p>Order #{item.order_id}</p>
             <p>Qty: {item.quantity}</p>
+
             <p>
               Status:
               <span className={`status-badge status-${item.vendor_status}`}>
-               {item.vendor_status}
+                {item.vendor_status}
               </span>
             </p>
-
 
             <select
               value={item.vendor_status}
@@ -67,7 +68,8 @@ function VendorOrders() {
         ))
       )}
     </div>
-  );
+  </div>
+ );
 }
 
 export default VendorOrders;

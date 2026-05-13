@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-    VendorDashboardView,
+    VendorDashboardView, VendorSalesChartView,
     AllShopsView
 )
 
@@ -10,5 +10,8 @@ urlpatterns = [
 
     # ADMIN
     path("admin/shops/", AllShopsView.as_view(), name="all-shops"),
+
+    #saleschart
+    path("vendor/dashboard/sales-chart/", VendorSalesChartView.as_view()),
 ]
 

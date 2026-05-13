@@ -26,8 +26,14 @@ class PlaceOrderFromCart(APIView):
 
     @transaction.atomic
     def post(self, request):
+
         user = request.user
-        cart_items = Cart.objects.filter(user=user, is_selected=True)
+
+        # ✅ Get selected cart items
+        cart_items = Cart.objects.filter(
+            user=user,
+            is_selected=True
+        )
 
         if not cart_items.exists():
             return Response(
@@ -35,21 +41,38 @@ class PlaceOrderFromCart(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
+        # ✅ Get frontend data
+        address = request.data.get("address")
+        payment_method = request.data.get("payment_method", "cod")
+
+        # ✅ Validate address
+        if not address:
+            return Response(
+                {"error": "Address is required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # ✅ Create Order
         order = Order.objects.create(
             user=user,
-            payment_method=request.data.get("payment_method", "cod")
+            address=address,
+            payment_method=payment_method,
         )
 
         total_price = 0
 
+        # ✅ Create Order Items
         for item in cart_items:
+
             product = item.product
 
+            # Stock validation
             if item.quantity > product.stock:
                 raise PermissionDenied(
                     f"Not enough stock for {product.name}"
                 )
 
+            # Create order item
             OrderItem.objects.create(
                 order=order,
                 product=product,
@@ -58,18 +81,36 @@ class PlaceOrderFromCart(APIView):
                 price=product.final_price
             )
 
+            # Reduce stock
             product.stock -= item.quantity
             product.save()
 
+            # Calculate total
             total_price += product.final_price * item.quantity
 
+        # ✅ Update total price
         order.total_price = total_price
+
+        # COD → pending
+        if payment_method == "cod":
+            order.payment_status = "pending"
+
+        # Razorpay → pending until payment success
+        elif payment_method == "razorpay":
+            order.payment_status = "pending"
+
         order.save()
 
+        # ✅ Remove ordered items from cart
         cart_items.delete()
 
         serializer = OrderSerializer(order)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(
+            serializer.data,
+            status=status.HTTP_201_CREATED
+        )
+
 
 # ===============================
 # 👤 CUSTOMER VIEWS OWN ORDERS
@@ -79,7 +120,10 @@ class MyOrdersView(ListAPIView):
     permission_classes = [IsCustomer]
 
     def get_queryset(self):
-        return Order.objects.filter(user=self.request.user)
+        return Order.objects.filter(
+            user=self.request.user
+        ).order_by("-created_at")
+
 
 # ===============================
 # 🏪 VENDOR SEES THEIR SALES
@@ -155,3 +199,13 @@ class CancelOrderView(APIView):
         return Response(
             {"message": "Order cancelled successfully"}
         )  
+
+# ===============================
+# 🚚 CUSTOMER TRACKS ORDER
+# ===============================
+class OrderTrackingView(generics.RetrieveAPIView):
+    serializer_class = OrderTrackingSerializer
+    permission_classes = [IsCustomer]
+
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user)

@@ -11,7 +11,7 @@ import Register from "./pages/Register";
 import OrderTracking from "./pages/OrderTracking";
 import VendorOrders from "./pages/VendorOrders";
 import VendorApply from "./pages/VendorApply";
-
+import CustomerTracking from "./pages/CustomerTracking";
 import AppRoutes from "./routes/AppRoutes";
 
 function App() {
@@ -37,6 +37,10 @@ function App() {
         <Route
           path="/vendor/orders"
           element={isVendor() ? <VendorOrders /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/orders/track/:id"
+          element={<CustomerTracking />}
         />
         <Route path="/*" element={<AppRoutes />} />
       </Routes>
