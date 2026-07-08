@@ -21,4 +21,10 @@ urlpatterns = [
     # 👑 PLATFORM ADMIN
     path("admin/orders/", AllOrdersView.as_view(), name="all-orders"),
     path("cancel/<int:pk>/", CancelOrderView.as_view(), name="cancel-order"),
+    # Track single order
+    path(
+        "track/<int:pk>/",
+        OrderTrackingView.as_view(),
+        name="order-tracking"
+    ),
 ]
